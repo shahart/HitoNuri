@@ -1,5 +1,5 @@
 Software title: Hitori and Nurikabe
-version: 1.0
+version: 1.0 (~2008)
 
 Category: games\puzzles
 
