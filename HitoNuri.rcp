@@ -17,7 +17,6 @@ BEGIN
     TITLE "My Hitori (and Nurikabe)"
     MESSAGE "This is my first app for the Palm platform. \n\n"\
             "Written in Java using Jump - thanks! see also PilotJFC and WabaJump.\n\n"\
-            "shahar_t@hotmail.com\n\n"\
             "Hitori: Shade squares.. black so that the numbers not appear in a row or column more than once. In addition, shaded squares must... not touch each other vertically or horizontally while all un-shaded squares must create a single continuous area.\n\n"\
             "Nurikabe (or 'Islands in the Stream'): All of the black cells must be connected (But No 2x2 blocks); Island size equals to the number it contains.\n\nEnjoy."
     BUTTONS "OK"
