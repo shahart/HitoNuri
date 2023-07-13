@@ -23,3 +23,9 @@ Features:
 - detect when you solve it :)
 
 Source code is attached.
+
+
+![](https://github.com/shahart/HitoNuri/blob/master/Hitori.GIF)
+
+
+![](https://github.com/shahart/HitoNuri/blob/master/Nurikabe.GIF)
