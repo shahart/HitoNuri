@@ -29,3 +29,9 @@ Source code is attached.
 
 
 ![](https://github.com/shahart/HitoNuri/blob/master/Nurikabe.GIF)
+
+
+Would you like to play online ?
+- Goto https://cloudpilot-emu.github.io/app/#/tab/emulation
+- Install the provided ROM
+- Drag the provided PRC
