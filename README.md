@@ -35,3 +35,6 @@ Would you like to play online ?
 - Goto https://cloudpilot-emu.github.io/app/#/tab/emulation
 - Install the provided ROM
 - Drag the provided PRC
+
+Or use an App' like https://apps.apple.com/us/app/cloudpilotemu/id6478502699
+
