@@ -13,7 +13,7 @@ Enjoy Hitori and Nurikabe - with 17 predefined puzzles (from time to time I'll e
 
 As I didn't found a small PRC for these puzzles (except using 3 PRCs for total size of 926 KB), I decided to do it by myself, using Jump2 for Java.
 
-For info about the rules, please refer to Wikipedia: Hitori or Nurikabe.
+For info about the rules, please refer to Wikipedia: Hitori or Nurikabe. or http://shahart.github.io/HitoNuri
 
 Features:
 
