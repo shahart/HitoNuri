@@ -1,302 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HitoNuri</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            overflow: hidden;
-        }
-        
-        .slideshow-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
-        
-        .slide {
-            display: none;
-            padding: 60px;
-            background: white;
-            width: 100%;
-            height: 100%;
-            overflow-y: auto;
-            animation: fadeIn 0.5s;
-        }
-        
-        .slide.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            border-bottom: 4px solid #764ba2;
-            padding-bottom: 15px;
-        }
-        
-        h2 {
-            color: #764ba2;
-            font-size: 2em;
-            margin-top: 30px;
-            margin-bottom: 20px;
-        }
-        
-        h3 {
-            color: #555;
-            font-size: 1.5em;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-        
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        ul, ol {
-            font-size: 1.2em;
-            margin-left: 30px;
-            margin-bottom: 20px;
-            line-height: 1.8;
-        }
-        
-        li {
-            margin-bottom: 10px;
-        }
-        
-        code {
-            background: #f4f4f4;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-family: 'Courier New', monospace;
-            color: #e83e8c;
-        }
-        
-        pre {
-            background: #2d2d2d;
-            color: #f8f8f2;
-            padding: 20px;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 20px 0;
-            font-size: 1em;
-            line-height: 1.5;
-        }
-        
-        pre code {
-            background: none;
-            color: inherit;
-            padding: 0;
-        }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 1.1em;
-        }
-        
-        th {
-            background: #667eea;
-            color: white;
-            padding: 15px;
-            text-align: left;
-            font-weight: bold;
-        }
-        
-        td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        tr:hover {
-            background: #f5f5f5;
-        }
-        
-        .nav-buttons {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
-        }
-        
-        .nav-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            margin: 0 10px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: all 0.3s;
-        }
-        
-        .nav-btn:hover {
-            background: #764ba2;
-            transform: scale(1.05);
-        }
-        
-        .nav-btn:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .slide-number {
-            position: fixed;
-            top: 20px;
-            right: 30px;
-            background: rgba(102, 126, 234, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            z-index: 1000;
-        }
-        
-        .highlight {
-            background: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 3px;
-        }
-        
-        .badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
-            font-weight: bold;
-            margin: 5px;
-        }
-        
-        .badge-public { background: #28a745; color: white; }
-        .badge-restricted { background: #ffc107; color: black; }
-        .badge-sensitive { background: #fd7e14; color: white; }
-        .badge-highly-sensitive { background: #dc3545; color: white; }
-        .badge-secret { background: #6f42c1; color: white; }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HitoNuri — Palm puzzles</title>
+  <link rel="stylesheet" href="hitonuri.css">
 </head>
 <body>
-    <div class="slideshow-container">
-        <div class="slide-number">
-            <span id="current-slide">1</span> / <span id="total-slides">3</span>
+  <main class="palm" aria-label="HitoNuri Palm puzzle game">
+    <div class="brand">HitoNuri • Palm OS</div>
+    <section class="bezel">
+      <div class="screen">
+        <div class="top"><span id="title">HitoNuri</span><span id="clock"></span></div>
+        <div id="board" class="board" aria-label="Puzzle grid"></div>
+        <div id="message" class="message" aria-live="polite"></div>
+        <div class="controls">
+          <button class="btn" id="restart" title="Restart">&lt;</button>
+          <button class="btn" id="next">Next</button>
+          <button class="btn" id="switch">Hitori</button>
+          <button class="btn" id="solve" title="Show solution">:)</button>
+          <button class="btn" id="helpBtn" title="Rules">?</button>
         </div>
-        
-        <!-- Slide 1 -->
-        <div class="slide active">
-            <h1>Hitori</h1>
-            <h2>Rules</h2>
-            
-            Hitori is played with a grid of squares or cells, with each cell initially containing a number. The game is played by eliminating squares/numbers and this is done by blacking them out. The objective is to transform the grid to a state wherein all three following rules are true:
-
-            <br><br>
-            <ul>
-                <li>no row or column can have more than one occurrence of any given number</li>
-                <li>black cells cannot be horizontally or vertically adjacent, although they can be diagonal to one another.</li>
-                <li>the remaining numbered cells must be all connected to each other, horizontally or vertically.</li>
-            </ul>
-
-            <img src="https://raw.githubusercontent.com/shahart/HitoNuri/master/Hitori.GIF" alt="Hitori Example" style="width: 60%; max-width: 600px; margin-top: 30px; border: 2px solid #667eea; border-radius: 10px;">
-
-        </div>
-        
-        <!-- Slide 2 -->
-        <div class="slide">
-            <h1>Solving techniques</h1>
-            
-            <ul>
-                <li>Once it is determined that a cell cannot be black, some players find it useful to circle the number, as it makes the puzzle easier to read as the solution progresses. Below we assume that this convention is followed.</li>
-                <li>When it is determined that a cell must be black, all orthogonally adjacent cells cannot be black and so can be circled.</li>
-                <li>If a cell has been circled to show that it cannot be black, any cells containing the same number in that row and column must be black.</li>
-                <li>If blacking out a cell would cause a connected non-black area to become separated into several unconnected components, the cell cannot be black and so can be circled.</li>
-                <li>In a sequence of three identical, adjacent numbers, the centre number cannot be black and the cells on either side must be black. The reason is that if one of the end numbers remains non-black this would result in either two adjacent black cells or two cells with the same number in the same row or column, neither of which are allowed. (This is a special case of the next item.)</li>
-                <li>In case of two identical, adjacent numbers, if another cell occurs in the same row or column containing the same number, the latter cell must be black. Otherwise, if it remains non-black, this would result in either two cells with the same number in the same row or column, or two adjacent black cells, neither of which are allowed.</li>
-                <li>Any number that has two identical numbers on opposite sides of itself cannot be black, because one of the two identical numbers must be black, and it cannot be adjacent to another black cell.</li>
-                <li>When two pairs of identical numbers are in a two by two square on the grid, two of them must be black along a diagonal. There are only two possible combinations, and it is sometimes possible to decide which is correct by determining if one variation will cut non-black squares off from the remainder of the grid.</li>
-                <li>When two pairs of identical numbers form a square in the corner of a grid, the corner square and the one diagonally opposite must be black. The alternative would leave the corner square isolated from the other non-black numbers.</li>
-            </ul>
-        </div>
-        
-        <!-- Slide 3 -->
-        <div class="slide">
-            <h1>Nurikabe</h1>
-            
-            <h2>Rules</h2>
-
-            The puzzle is played on a typically rectangular grid of cells, some of which contain numbers. Cells are initially of unknown color, but can only be black or white. Two same-color cells are considered "connected" if they are adjacent vertically or horizontally (touching diagonally doesn't count). Connected white cells form "islands", while connected black cells form the "sea".
-            <br><br>
-            The challenge is to paint each cell black or white, subject to the following rules:
-            <br><br>
-            <ul>
-                <li>Each numbered cell is an island cell, the number in it is the number of cells in that island.</li>
-                <li>Each island must contain exactly one numbered cell.</li>
-                <li>There must be only one sea, which is not allowed to contain "pools", i.e. 2×2 areas of black cells.</li>
-            </ul>
-            Human solvers typically dot the non-numbered cells they've determined to be certain to belong to an island.
-            <br><br>
-            Like most other pure-logic puzzles, a unique solution is expected, and a grid containing random numbers is highly unlikely to provide a uniquely solvable Nurikabe puzzle.
-
-            <h2>Solution Methods</h2>
-            See <a href="https://en.wikipedia.org/wiki/Nurikabe_(puzzle)#Solution_methods">Wiki</a>
-            
-            <h1 style="text-align: center; margin-top: 60px; color: #667eea;">Good luck!</h1>
-        </div>
+      </div>
+    </section>
+    <div class="silk"><span class="abc">a b c</span><span class="nums">1 2 3</span></div>
+    <div class="hardware">
+      <button class="round" id="prev" title="Previous puzzle">◀</button>
+      <button class="round" id="restart2" title="Restart">↺</button>
+      <button class="rocker" id="next2" title="Next puzzle">▲<br>▼</button>
+      <button class="round" id="helpBtn2" title="Rules">?</button>
     </div>
-    
-    <div class="nav-buttons">
-        <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">← Previous</button>
-        <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Next →</button>
+  </main>
+  <div id="legacy" class="legacy" role="dialog" aria-modal="true" aria-label="Original HitoNuri page">
+    <div class="legacy-window">
+      <button class="btn legacy-close" id="closeLegacy">Close legacy page</button>
+      <iframe src="index-old.html" title="Original HitoNuri information page"></iframe>
     </div>
-    
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        document.getElementById('total-slides').textContent = totalSlides;
-        
-        function showSlide(n) {
-            slides[currentSlide].classList.remove('active');
-            currentSlide = (n + totalSlides) % totalSlides;
-            slides[currentSlide].classList.add('active');
-            document.getElementById('current-slide').textContent = currentSlide + 1;
-            
-            // Update button states
-            document.getElementById('prev-btn').disabled = currentSlide === 0;
-            document.getElementById('next-btn').disabled = currentSlide === totalSlides - 1;
-        }
-        
-        function changeSlide(n) {
-            showSlide(currentSlide + n);
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') changeSlide(-1);
-            if (e.key === 'ArrowRight') changeSlide(1);
-        });
-        
-        // Initialize
-        showSlide(0);
-    </script>
+  </div>
+  <script src="hitonuri.js"></script>
 </body>
 </html>
