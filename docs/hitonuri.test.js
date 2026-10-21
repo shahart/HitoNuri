@@ -44,7 +44,7 @@ class FakeElement {
 
 function loadGame() {
   const ids = [
-    'board', 'title', 'clock', 'message', 'switch', 'restart', 'restart2',
+    'board', 'title', 'clock', 'message', 'switch', 'restart', 'restart2', 'undo',
     'next', 'next2', 'prev', 'solve', 'helpBtn', 'helpBtn2', 'legacy', 'closeLegacy'
   ];
   const elements = Object.fromEntries(ids.map((id) => [id, new FakeElement(id)]));
@@ -86,6 +86,20 @@ test('shows a solution and reports completion', () => {
   elements.solve.click();
   assert.equal(elements.message.textContent, ':) Solved!');
   assert.equal(elements.message.className, 'message win');
+});
+
+test('undo restores the previous cell state and disables when history is empty', () => {
+  const { elements } = loadGame();
+  const originalClass = elements.board.children[0].className;
+  assert.equal(elements.undo.disabled, true);
+
+  elements.board.children[0].click();
+  assert.notEqual(elements.board.children[0].className, originalClass);
+  assert.equal(elements.undo.disabled, false);
+
+  elements.undo.click();
+  assert.equal(elements.board.children[0].className, originalClass);
+  assert.equal(elements.undo.disabled, true);
 });
 
 test('the question-mark control opens and closes the legacy page', () => {
