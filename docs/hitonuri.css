@@ -49,8 +49,9 @@ body {
 .message { height: 19px; font: 700 13px monospace; text-align: center; }
 .message.win { color: #c60000; }
 
-.controls { display: grid; grid-template-columns: 45px 1fr 1.25fr 45px 35px; gap: 5px; }
+.controls { display: grid; grid-template-columns: 38px 1fr 1fr 1.25fr 38px 32px; gap: 4px; }
 .btn { min-height: 35px; border: 2px solid #1b2119; border-radius: 7px; background: #c4c79c; color: #10140e; box-shadow: inset 1px 1px #e7e9bd, 1px 1px #737861; cursor: pointer; font: 700 14px Arial; }
+.btn:disabled { cursor: default; opacity: .55; }
 .btn:active { transform: translate(1px, 1px); box-shadow: inset 2px 2px #737861; }
 
 .silk { position: relative; height: 132px; margin: 12px 12px 0; border: 3px solid #151a16; border-radius: 9px; background: linear-gradient(135deg, #a9ad84, #c0c39a); }

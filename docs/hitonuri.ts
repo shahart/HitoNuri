@@ -46,6 +46,7 @@
   let puzzleIndex = 0;
   let puzzle: Puzzle = [];
   let state: CellState[][] = [];
+  const moveHistory: Array<{ row: number; column: number; previous: CellState }> = [];
   let nurikabeClues: number[][] = [];
 
   function loadPuzzle(offset = 0): void {
@@ -57,6 +58,7 @@
   }
 
   function resetState(): void {
+    moveHistory.length = 0;
     state = puzzle.map((row) => row.map((cell): CellState => (
       gameType === 'hitori' ? 'white' : cell === 'clue' ? 'clue' : 'empty'
     )));
@@ -89,11 +91,20 @@
   }
 
   function tapCell(row: number, column: number): void {
+    if (gameType === 'nurikabe' && state[row][column] === 'clue') return;
+    moveHistory.push({ row, column, previous: state[row][column] });
     if (gameType === 'hitori') state[row][column] = state[row][column] === 'black' ? 'white' : 'black';
     else if (state[row][column] !== 'clue') {
       const transitions: Record<'empty' | 'dot' | 'black', CellState> = { empty: 'dot', dot: 'black', black: 'empty' };
       state[row][column] = transitions[state[row][column] as 'empty' | 'dot' | 'black'];
     }
+    render();
+  }
+
+  function undoMove(): void {
+    const move = moveHistory.pop();
+    if (!move) return;
+    state[move.row][move.column] = move.previous;
     render();
   }
 
@@ -114,9 +125,11 @@
     byId('switch').textContent = `Switch to ${gameType === 'hitori' ? 'Nurikabe' : 'Hitori'}`;
     byId('message').textContent = isSolved() ? ':) Solved!' : gameType === 'hitori' ? 'Tap a number to black it out' : 'Tap: empty → dot → sea';
     byId('message').className = `message${isSolved() ? ' win' : ''}`;
+    (byId('undo') as HTMLButtonElement).disabled = moveHistory.length === 0;
   }
 
   function showSolution(): void {
+    moveHistory.length = 0;
     state = gameType === 'hitori'
       ? parseHitori(hitoriPuzzles[puzzleIndex]).map((row) => row.map((cell): CellState => cell < 0 ? 'black' : 'white'))
       : parseNurikabe(nurikabePuzzles[puzzleIndex]);
@@ -125,6 +138,7 @@
 
   function toggleGame(): void { gameType = gameType === 'hitori' ? 'nurikabe' : 'hitori'; puzzleIndex = 0; loadPuzzle(); }
   byId('restart').onclick = byId('restart2').onclick = resetState;
+  byId('undo').onclick = undoMove;
   byId('next').onclick = byId('next2').onclick = () => loadPuzzle(1);
   byId('prev').onclick = () => loadPuzzle(-1);
   byId('solve').onclick = showSolution; byId('switch').onclick = toggleGame;
